@@ -1,26 +1,26 @@
 package main
 
-import (
-	"errors"
-	"fmt"
-)
+import "fmt"
 
-func divisao(a, b int) (float64, error) {
-	if b == 0 {
-		return 0, errors.New("Não é possível dividir por zero.")
+func contarVogais(s string) int {
+	s = strings.ToLower(s)
+
+	contagem := 0
+
+	// Iterar sobre cada caractere da string
+	for _, char := range s {
+		// Verificar se o caractere é uma vogal
+		switch char {
+		case 'a', 'e', 'i', 'o', 'u':
+			contagem++
+		}
 	}
 
-	resultado := float64(a) / float64(b)
-	return resultado, nil
+	return contagem
 }
 
 func main() {
-	numero1, numero2 := 10, 2
-	resultado, err := divisao(numero1, numero2)
-
-	if err != nil {
-		fmt.Println("Erro:", err)
-	} else {
-		fmt.Printf("%d dividido por %d é igual a %.2f\n", numero1, numero2, resultado)
-	}
+	frase := "Esta é uma frase de exemplo"
+	qtdVogais := contarVogais(frase)
+	fmt.Printf("A quantidade de vogais na frase é: %d\n", qtdVogais)
 }
