@@ -1,0 +1,30 @@
+package main
+
+import (
+	"fmt"
+)
+
+func mediaAritmetica(valores []int) (float64, error) {
+	if len(valores) == 0 {
+		return 0, fmt.Errorf("O slice está vazio, não é possível calcular a média.")
+	}
+
+	soma := 0
+	for _, valor := range valores {
+		soma += valor
+	}
+
+	media := float64(soma) / float64(len(valores))
+	return media, nil
+}
+
+func main() {
+	numeros := []int{5, 10, 15, 20}
+	resultado, err := mediaAritmetica(numeros)
+
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Printf("Média aritmética: %.2f\n", resultado)
+	}
+}
