@@ -1,0 +1,37 @@
+package main
+
+import (
+	"errors"
+	"fmt"
+)
+
+type FuncaoAplicada func(int) int
+
+func aplicarFuncao(slice []int, funcao FuncaoAplicada) ([]int, error) {
+	if len(slice) == 0 {
+		return nil, errors.New("O slice está vazio. Não é possível aplicar a função.")
+	}
+
+	resultados := make([]int, len(slice))
+	for i, elemento := range slice {
+		resultados[i] = funcao(elemento)
+	}
+
+	return resultados, nil
+}
+
+func main() {
+	numeros := []int{1, 2, 3, 4, 5}
+
+	funcaoMultiplicarPorDois := func(x int) int {
+		return x * 2
+	}
+
+	resultados, err := aplicarFuncao(numeros, funcaoMultiplicarPorDois)
+
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Resultado da aplicação da função:", resultados)
+	}
+}
