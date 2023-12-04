@@ -1,0 +1,36 @@
+package main
+
+import (
+	"errors"
+	"fmt"
+	"unicode"
+)
+
+func filtrarMaiusculas(slice []string) (string, error) {
+	if len(slice) == 0 {
+		return "", errors.New("O slice está vazio. Não há strings para filtrar.")
+	}
+
+	var resultante string
+
+	for _, str := range slice {
+		// Verificar se a primeira letra é maiúscula
+		if len(str) > 0 && unicode.IsUpper(rune(str[0])) {
+			resultante += str + " "
+		}
+	}
+
+	return resultante, nil
+}
+
+func main() {
+	palavras := []string{"Gato", "cachorro", "Elefante", "macaco"}
+
+	resultado, err := filtrarMaiusculas(palavras)
+
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Strings que começam com letra maiúscula:", resultado)
+	}
+}
