@@ -3,24 +3,30 @@ package main
 import (
 	"errors"
 	"fmt"
+	"sort"
 )
 
-func divisao(a, b int) (float64, error) {
-	if b == 0 {
-		return 0, errors.New("Não é possível dividir por zero.")
+func segundoMaiorValor(slice []int) (int, error) {
+	if len(slice) < 2 {
+		return 0, errors.New("O slice precisa ter pelo menos dois elementos para encontrar o segundo maior valor.")
 	}
 
-	resultado := float64(a) / float64(b)
-	return resultado, nil
+	copiaSlice := make([]int, len(slice))
+	copy(copiaSlice, slice)
+
+	sort.Sort(sort.Reverse(sort.IntSlice(copiaSlice)))
+
+	segundoMaior := copiaSlice[1]
+	return segundoMaior, nil
 }
 
 func main() {
-	numero1, numero2 := 10, 2
-	resultado, err := divisao(numero1, numero2)
+	valores := []int{10, 5, 8, 15, 3}
+	resultado, err := segundoMaiorValor(valores)
 
 	if err != nil {
 		fmt.Println("Erro:", err)
 	} else {
-		fmt.Printf("%d dividido por %d é igual a %.2f\n", numero1, numero2, resultado)
+		fmt.Printf("O segundo maior valor no slice é: %d\n", resultado)
 	}
 }
