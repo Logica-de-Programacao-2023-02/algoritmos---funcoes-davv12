@@ -1,0 +1,38 @@
+package main
+
+import (
+	"errors"
+	"fmt"
+)
+
+type FuncaoAplicacao func(int) int
+
+func aplicarFuncaoESomar(slice []int, aplicar FuncaoAplicacao) (int, error) {
+	if len(slice) == 0 {
+		return 0, errors.New("O slice está vazio. Não há elementos para aplicar a função.")
+	}
+
+	soma := 0
+	for _, elemento := range slice {
+		soma += aplicar(elemento)
+	}
+
+	return soma, nil
+}
+
+func main() {
+	numeros := []int{1, 2, 3, 4, 5}
+
+	funcaoQuadrado := func(x int) int {
+		return x * x
+	}
+
+	resultado, err := aplicarFuncaoESomar(numeros, funcaoQuadrado)
+
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Soma dos quadrados dos elementos:", resultado)
+	}
+}
+v
