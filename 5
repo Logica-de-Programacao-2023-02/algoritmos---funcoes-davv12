@@ -1,26 +1,25 @@
 package main
 
-import (
-	"errors"
-	"fmt"
-)
+import "fmt"
 
-func divisao(a, b int) (float64, error) {
-	if b == 0 {
-		return 0, errors.New("Não é possível dividir por zero.")
+func encontrarPosicao(slice []int, valor int) int {
+	for i, elemento := range slice {
+		if elemento == valor {
+			return i
+		}
 	}
-
-	resultado := float64(a) / float64(b)
-	return resultado, nil
+	return -1
 }
 
 func main() {
-	numero1, numero2 := 10, 2
-	resultado, err := divisao(numero1, numero2)
+	numeros := []int{10, 5, 8, 15, 3}
+	valorProcurado := 8
 
-	if err != nil {
-		fmt.Println("Erro:", err)
+	posicao := encontrarPosicao(numeros, valorProcurado)
+
+	if posicao != -1 {
+		fmt.Printf("O valor %d foi encontrado na posição %d do slice.\n", valorProcurado, posicao)
 	} else {
-		fmt.Printf("%d dividido por %d é igual a %.2f\n", numero1, numero2, resultado)
+		fmt.Printf("O valor %d não foi encontrado no slice.\n", valorProcurado)
 	}
 }
