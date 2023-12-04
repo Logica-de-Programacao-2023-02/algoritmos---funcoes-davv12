@@ -1,0 +1,18 @@
+package main
+
+import "fmt"
+
+func concatenarStrings(strings []string) string {
+	resultado := ""
+	for _, str := range strings {
+		resultado += str
+	}
+	return resultado
+}
+
+func main() {
+	listaDeStrings := []string{"Olá, ", "como ", "vai ", "você?"}
+	resultadoConcatenado := concatenarStrings(listaDeStrings)
+
+	fmt.Println("Resultado da concatenação:", resultadoConcatenado)
+}
