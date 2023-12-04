@@ -1,0 +1,37 @@
+package main
+
+import (
+	"errors"
+	"fmt"
+	"strings"
+)
+
+func substituirVogais(s string) (string, error) {
+	if s == "" {
+		return "", errors.New("A string está vazia. Não há vogais para substituir.")
+	}
+
+	resultado := strings.Map(func(r rune) rune {
+		switch r {
+		case 'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U':
+			return '*'
+		default:
+			return r
+		}
+	}, s)
+
+	return resultado, nil
+}
+
+func main() {
+	frase := "Hello, World!"
+
+	resultado, err := substituirVogais(frase)
+
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("String com vogais substituídas:", resultado)
+	}
+}
+
